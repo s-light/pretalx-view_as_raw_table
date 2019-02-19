@@ -1,0 +1,3 @@
+recursive-include pretalx_view_as_raw_table/static *
+recursive-include pretalx_view_as_raw_table/templates *
+recursive-include pretalx_view_as_raw_table/locale *
