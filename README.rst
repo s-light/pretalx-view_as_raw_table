@@ -1,14 +1,7 @@
 pretalx view as raw table plugin
-==========================
+================================
 
 This is a plugin for `pretalx`_.
-
-Current State
--------------
-
-WIP -
-a baisc static table version can be found in the `static_table branch`_
-a first idea skeleton for a api-javascript based version can be found in the `API_version branch`_
 
 
 Development setup
@@ -36,7 +29,5 @@ Copyright 2019 Stefan Krüger
 Released under the terms of the Apache License 2.0
 
 
-.. _static_table branch: /s-light/pretalx-view_as_raw_table/blob/static_table/
-.. _API_version branch: /s-light/pretalx-view_as_raw_table/blob/API_version/
 .. _pretalx: https://github.com/pretalx/pretalx
 .. _pretalx development setup: https://docs.pretalx.org/en/latest/developer/setup.html
