@@ -11,7 +11,7 @@ WIP -
 for mor information have a look at the [README.rst](README.rst)
 
 
-[API_version/](API_version/)
-[/tree/API_version/](/tree/API_version/)
-[tree/API_version/](tree/API_version/)
-[../tree/API_version/](../tree/API_version/)
+- [API_version/](API_version/)
+- [/tree/API_version/](/tree/API_version/)
+- [tree/API_version/](tree/API_version/)
+- [../tree/API_version/](../tree/API_version/)
