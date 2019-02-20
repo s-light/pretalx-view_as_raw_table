@@ -1,5 +1,6 @@
 """."""
 
+from django.core import serializers
 from django.views.generic import ListView
 
 from pretalx.common.mixins.views import EventPermissionRequired
@@ -12,37 +13,39 @@ class StaticTable_Submissions(EventPermissionRequired, ListView):
     """Raw Table View."""
 
     model = Submission
-    context_object_name = 'data'
+    context_object_name = 'submissions'
     template_name = 'pretalx_view_as_raw_table/static_table_submissions.html'
     permission_required = 'orga.view_submissions'
 
     def get_queryset(self):
         """Prepare queryset."""
-        qs = (
+        self.qs = (
             self.request.event.submissions(manager='all_objects')
             .select_related('submission_type')
             .order_by('-id')
             .all()
         )
-        return qs.distinct()
+        return self.qs.distinct()
 
     def get_context_data(self, **kwargs):
         """Prepare context."""
         context = super().get_context_data(**kwargs)
-        # dates = data.keys()
-        # if len(dates) > 1:
-        #     date_range = rrule.rrule(
-        #         rrule.DAILY,
-        #         count=(max(dates) - min(dates)).days + 1,
-        #         dtstart=min(dates),
-        #     )
-        #     if len(data) > 1:
-        #         context['timeline_data'] = json.dumps(
-        #             [
-        #                {"x": date.isoformat(), "y": data.get(date.date(), 0)}
-        #                 for date in date_range
-        #             ]
-        #         )
+        data = serializers.serialize("python", self.qs.distinct())
+        # print(data)
+        context['data_set_name'] = 'Submissions'
+        context['data_headers'] = []
+        context['data_raw'] = data
+        for name, value in data[0]['fields'].items():
+            # print(name)
+            context['data_headers'].append(name)
+        context['data_list'] = []
+        # print(data[0]['fields'].items())
+        # for model, pk, fields in data:
+        #     row = []
+        #     print(model, pk, fields)
+        #     # for name, value in fields:
+        #     #     row.append(value)
+        #     context['data_list'].append(row)
         return context
 
 

@@ -11,17 +11,26 @@
 
 {% block content %}
 <header>
-    <h1>Static Table - Submissions</h1>
+    <h1>Static Table - {{ data_set_name }}</h1>
     <p>
     </p>
 </header>
 <section class="result">
     <table id="result">
         <thead>
-
+            {% for item in data_headers %}
+                <th>{{ item }}</th>
+            {% endfor %}
         </thead>
         <tbody>
-
+            {% for instance in data_raw %}
+            <tr>
+                {% for field, value in instance.fields.items %}
+                    {# <td>{{ field }}: {{ value }}</td> #}
+                    <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
 </section>
