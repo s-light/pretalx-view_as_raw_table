@@ -34,15 +34,27 @@ def navbar_info(sender, request, **kwargs):
         #     ),
         # },
         {
-            'label': 'Static Table',
+            'label': 'Static Table - Submissions',
             'icon': 'table',
             'url': reverse(
-                'plugins:pretalx_view_as_raw_table:static_table',
+                'plugins:pretalx_view_as_raw_table:static_table.submissions',
                 kwargs={'event': request.event.slug}
             ),
             'active': (
                 url.namespace == 'plugins:pretalx_view_as_raw_table'
-                and url.url_name == 'static_table'
+                and url.url_name == 'static_table.submissions'
+            ),
+        },
+        {
+            'label': 'Static Table - Talks',
+            'icon': 'table',
+            'url': reverse(
+                'plugins:pretalx_view_as_raw_table:static_table.talks',
+                kwargs={'event': request.event.slug}
+            ),
+            'active': (
+                url.namespace == 'plugins:pretalx_view_as_raw_table'
+                and url.url_name == 'static_table.talks'
             ),
         },
     ]

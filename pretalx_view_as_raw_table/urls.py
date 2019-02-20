@@ -16,8 +16,13 @@ urlpatterns = [
     #     name='rawtable'
     # ),
     url(
-        f'^orga/event/(?P<event>[{SLUG_CHARS}]+)/p/static_table',
-        static_table.StaticTable.as_view(),
-        name='static_table'
+        f'^orga/event/(?P<event>[{SLUG_CHARS}]+)/p/static_table/submissions',
+        static_table.StaticTable_Submissions.as_view(),
+        name='static_table.submissions'
+    ),
+    url(
+        f'^orga/event/(?P<event>[{SLUG_CHARS}]+)/p/static_table/talks',
+        static_table.StaticTable_Talks.as_view(),
+        name='static_table.talks'
     ),
 ]
