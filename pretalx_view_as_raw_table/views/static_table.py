@@ -2,12 +2,12 @@
 
 from django.views.generic import ListView
 
-from pretalx.common.mixins.views import PermissionRequired
+from pretalx.common.mixins.views import EventPermissionRequired
 
 from pretalx.submission.models import Submission
 
 
-class StaticTable(PermissionRequired, ListView):
+class StaticTable(EventPermissionRequired, ListView):
     """Raw Table View."""
 
     model = Submission
@@ -43,3 +43,9 @@ class StaticTable(PermissionRequired, ListView):
         #             ]
         #         )
         return context
+
+
+def world(request, event):
+    """Hello World."""
+    from django.http import HttpResponse
+    return HttpResponse('Hello World :-) (from the static_table.py)')
