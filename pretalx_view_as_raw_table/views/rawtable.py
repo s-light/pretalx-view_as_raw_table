@@ -11,7 +11,6 @@ from pretalx.common.mixins.views import EventPermissionRequired
 
 from pretalx.submission.models import Submission
 
-
 @receiver(nav_event, dispatch_uid='pretalx_view_as_raw_table__submissions')
 def navbar_info(sender, request, **kwargs):
     """."""
@@ -71,3 +70,9 @@ class RawTable(EventPermissionRequired):
     #                 ]
     #             )
     #     return context
+
+
+def world(request, event):
+    """Hello World."""
+    from django.http import HttpResponse
+    return HttpResponse('Hello World')
