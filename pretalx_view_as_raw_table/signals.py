@@ -10,9 +10,9 @@ from django.urls import resolve, reverse
 from pretalx.orga.signals import nav_event
 
 
-@receiver(nav_event, dispatch_uid='pretalx_view_as_raw_table__submissions')
+@receiver(nav_event, dispatch_uid='pretalx_view_as_raw_table__rawtable')
 def navbar_info(sender, request, **kwargs):
-    """."""
+    """Register button in orga navigation bar."""
     url = resolve(request.path_info)
     can_see_orga_area = request.user.has_perm(
         'orga.view_orga_area',
@@ -24,11 +24,12 @@ def navbar_info(sender, request, **kwargs):
         # 'label': _('Raw Table'),
         'label': 'Raw Table',
         'icon': 'table',
-        'url': reverse('plugins:pretalx_view_as_raw_table:index', kwargs={
-            'event': request.event.slug,
-        }),
+        'url': reverse(
+            'plugins:pretalx_view_as_raw_table:rawtable',
+            kwargs={'event': request.event.slug}
+        ),
         'active': (
             url.namespace == 'plugins:pretalx_view_as_raw_table'
-            and url.url_name == 'view'
+            and url.url_name == 'rawtable'
         ),
     }]
