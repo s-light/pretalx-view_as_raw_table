@@ -10,7 +10,7 @@ from django.urls import resolve, reverse
 from pretalx.orga.signals import nav_event
 
 
-@receiver(nav_event, dispatch_uid='pretalx_view_as_raw_table__rawtable')
+@receiver(nav_event, dispatch_uid='pretalx_view_as_raw_table')
 def navbar_info(sender, request, **kwargs):
     """Register button in orga navigation bar."""
     url = resolve(request.path_info)
@@ -20,16 +20,29 @@ def navbar_info(sender, request, **kwargs):
     )
     if not can_see_orga_area:
         return []
-    return [{
-        # 'label': _('Raw Table'),
-        'label': 'Raw Table',
-        'icon': 'table',
-        'url': reverse(
-            'plugins:pretalx_view_as_raw_table:rawtable',
-            kwargs={'event': request.event.slug}
-        ),
-        'active': (
-            url.namespace == 'plugins:pretalx_view_as_raw_table'
-            and url.url_name == 'rawtable'
-        ),
-    }]
+    return [
+        # {
+        #     'label': 'Raw Table',
+        #     'icon': 'table',
+        #     'url': reverse(
+        #         'plugins:pretalx_view_as_raw_table:rawtable',
+        #         kwargs={'event': request.event.slug}
+        #     ),
+        #     'active': (
+        #         url.namespace == 'plugins:pretalx_view_as_raw_table'
+        #         and url.url_name == 'rawtable'
+        #     ),
+        # },
+        {
+            'label': 'Static Table',
+            'icon': 'table',
+            'url': reverse(
+                'plugins:pretalx_view_as_raw_table:static_table',
+                kwargs={'event': request.event.slug}
+            ),
+            'active': (
+                url.namespace == 'plugins:pretalx_view_as_raw_table'
+                and url.url_name == 'static_table'
+            ),
+        },
+    ]
